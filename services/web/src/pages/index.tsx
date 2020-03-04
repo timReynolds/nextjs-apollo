@@ -1,3 +1,4 @@
+import React from "react";
 import { NextPage } from "next";
 
 interface Props {
@@ -5,7 +6,7 @@ interface Props {
 }
 
 const Page: NextPage<Props> = ({ userAgent }) => (
-  <main>Your user agent: {userAgent}</main>
+  <main data-testid="message">Your user agent: {userAgent}</main>
 );
 
 Page.getInitialProps = async ({ req }) => {
