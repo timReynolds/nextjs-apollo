@@ -1,0 +1,10 @@
+{
+  "name": "nextjs-apollo",
+  "version": "1.0.0",
+  "scripts": {
+    "prettier": "prettier --write services/**/*.{js,jsx,ts,tsx} !**/.next/**"
+  },
+  "devDependencies": {
+    "prettier": "^1.19.1"
+  }
+}
