@@ -1,0 +1,44 @@
+{
+  "name": "nextjs-apollo",
+  "version": "1.0.0-beta.1",
+  "description": "Example of integrating next.js with apollo ",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:ci": "jest --ci",
+    "dev": "next",
+    "build": "next build",
+    "start": "next start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/timReynolds/nextjs-apollo.git"
+  },
+  "keywords": [
+    "apollo",
+    "next.js",
+    "graphql"
+  ],
+  "author": "Tim Reynolds",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/timReynolds/nextjs-apollo/issues"
+  },
+  "homepage": "https://github.com/timReynolds/nextjs-apollo#readme",
+  "dependencies": {
+    "next": "^9.2.2",
+    "react": "^16.13.0",
+    "react-dom": "^16.13.0"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^5.1.1",
+    "@testing-library/react": "^9.5.0",
+    "@types/jest": "^25.1.3",
+    "@types/node": "^13.7.7",
+    "@types/react": "^16.9.23",
+    "jest": "^25.1.0",
+    "ts-jest": "^25.2.1",
+    "typescript": "^3.8.3"
+  }
+}
