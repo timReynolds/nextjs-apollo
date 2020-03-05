@@ -9,6 +9,8 @@ describe("Index", () => {
     // Act
     const { getByTestId } = render(<Sut />);
     // Assert
-    expect(getByTestId("message")).toHaveTextContent("Your user agent:");
+    expect(getByTestId("message")).toHaveTextContent(
+      "environment: test user agent:"
+    );
   });
 });
