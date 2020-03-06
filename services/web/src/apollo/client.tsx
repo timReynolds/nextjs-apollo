@@ -1,5 +1,5 @@
 import React, { ReactElement } from "react";
-import { NextPage } from "next";
+import { NextPage, NextPageContext, NextComponentType } from "next";
 import Head from "next/head";
 import { ApolloProvider } from "@apollo/react-hooks";
 import { ApolloClient } from "apollo-client";
@@ -7,17 +7,25 @@ import { InMemoryCache } from "apollo-cache-inmemory";
 import { ApolloLink } from "apollo-link";
 
 // TODO: Types are first parse, could be made better
-type TCacheShape = any;
+type TCacheShape = {
+  [x: string]: unknown;
+  [x: number]: unknown;
+};
+
 let globalApolloClient: ApolloClient<TCacheShape> | null = null;
 
 interface WithApolloOptions {
-  ssr: boolean;
+  ssr?: boolean;
 }
 
 interface WithApolloProps {
-  apolloClient: ApolloClient<TCacheShape> | null;
+  apolloClient?: ApolloClient<TCacheShape> | null;
   apolloState?: {};
-  [x: string]: any;
+  [x: string]: unknown;
+}
+
+interface NextPageContextWithApolloClient extends NextPageContext {
+  apolloClient: ApolloClient<TCacheShape>;
 }
 
 function createIsomorphLink(): ApolloLink {
@@ -81,12 +89,15 @@ function initApolloClient(initialState?: {}): ApolloClient<TCacheShape> {
  * @param {Object} [config]
  * @param {Boolean} [config.ssr=true]
  */
-export function withApollo(PageComponent: NextPage, { ssr = true } = {}): any {
-  const WithApollo = ({
+export function withApollo<P>(
+  PageComponent: NextPage,
+  { ssr = true }: WithApolloOptions = {}
+): ReactElement | NextPage<WithApolloProps> {
+  const WithApollo: ReactElement | NextPage<WithApolloProps> = ({
     apolloClient,
     apolloState,
     ...pageProps
-  }: WithApolloProps): ReactElement => {
+  }) => {
     const client = apolloClient || initApolloClient(apolloState);
     return (
       <ApolloProvider client={client}>
@@ -108,7 +119,11 @@ export function withApollo(PageComponent: NextPage, { ssr = true } = {}): any {
   }
 
   if (ssr || PageComponent.getInitialProps) {
-    WithApollo.getInitialProps = async (ctx: any): Promise<any> => {
+    (WithApollo as NextComponentType<
+      NextPageContextWithApolloClient,
+      WithApolloProps,
+      WithApolloProps
+    >).getInitialProps = async (ctx): Promise<WithApolloProps> => {
       const { AppTree } = ctx;
 
       // Initialize ApolloClient, add it to the ctx object so

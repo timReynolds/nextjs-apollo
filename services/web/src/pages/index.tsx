@@ -4,8 +4,8 @@ import gql from "graphql-tag";
 import { useQuery } from "@apollo/react-hooks";
 import getConfig from "next/config";
 
-import { withApollo } from "../apollo/client";
 import { User } from "../apollo/types";
+import { withApollo } from "../apollo/client";
 
 const { publicRuntimeConfig } = getConfig();
 
@@ -23,7 +23,7 @@ const ViewerQuery = gql`
   }
 `;
 
-const Index: NextPage<Props> = ({ userAgent }) => {
+export const Index: NextPage<Props> = ({ userAgent }) => {
   const { loading, data } = useQuery<{ viewer: User }>(ViewerQuery);
 
   let viewer = "Loading...";

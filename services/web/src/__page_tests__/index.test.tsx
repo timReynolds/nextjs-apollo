@@ -1,7 +1,7 @@
 import React from "react";
 import { render } from "@testing-library/react";
 
-import Sut from "./index";
+import { Index as Sut } from "../pages/index";
 
 describe("Index", () => {
   test("Should display user agent text", () => {
