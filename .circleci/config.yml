@@ -14,10 +14,10 @@ jobs:
   test:
     executor:
       name: node/default
-    working_directory: services/web
     steps:
       - checkout
       - node/with-cache:
+          working_directory: services/web
           steps:
             - run: npm install
             - run: npm test
