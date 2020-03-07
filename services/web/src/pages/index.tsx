@@ -13,7 +13,7 @@ interface Props {
   userAgent?: string;
 }
 
-const ViewerQuery = gql`
+export const GET_VIEWER_QUERY = gql`
   query ViewerQuery {
     viewer {
       id
@@ -24,7 +24,7 @@ const ViewerQuery = gql`
 `;
 
 export const Index: NextPage<Props> = ({ userAgent }) => {
-  const { loading, data } = useQuery<{ viewer: User }>(ViewerQuery);
+  const { loading, data } = useQuery<{ viewer: User }>(GET_VIEWER_QUERY);
 
   let viewer = "Loading...";
   if (!loading && data && data.viewer && data.viewer.name) {
