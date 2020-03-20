@@ -9,7 +9,7 @@ jobs:
       - checkout
       - node/with-cache:
           steps:
-            - run: npm install
+            - run: npm ci
             - run: npm run lint
   test:
     executor:
@@ -18,7 +18,8 @@ jobs:
       - checkout
       - node/with-cache:
           steps:
-            - run: npm install
+            - run: cd services/web
+            - run: npm ci
             - run: npm run test
 workflows:
   build-and-test:
