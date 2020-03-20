@@ -20,8 +20,21 @@ jobs:
           steps:
             - run: cd services/web && npm ci
             - run: cd services/web && npm run test
+  simple-lint-test:
+    docker:
+      - image: node:12-alpine
+    steps:
+      - checkout
+      - run: npm ci
+      - run: cd services/web && npm ci
+      - run: npm run lint
+      - run: cd services/web && npm run test
+
 workflows:
   build-and-test:
     jobs:
       - lint
       - test
+  simple-build-and-test:
+    jobs:
+      - simple-lint-test
